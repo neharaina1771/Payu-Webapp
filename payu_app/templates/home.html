@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} <h2> <center> Welcome to PAYU </center> </h2>  {% endblock title %}
+
+{% block content %}
+
+<p> <h4> <center> Please provide your login credentials </center> </h4> </p>
+
+<div class='col-md-6 offset-md-3'>
+  <div class="form-group">
+    <form method = 'POST' action="{% url 'login' %}">
+      {% csrf_token %}
+      <table border="1">
+      <table>
+        {{ form.as_table }}
+      </table>
+  </div>
+  <button type="submit" class="btn btn-secondary">Login</button>
+  </form>
+</div>
+
+{% endblock %}

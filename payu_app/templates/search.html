@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+
+
+{% endblock title %}
+
+{% block content %}
+
+{% if search %}
+
+  <div class="text-center">
+    <form style="display: inline;" action="{% url 'display' %}" method = 'POST'>
+      {% csrf_token %}
+        <label for="start">From Date:</label>
+        <input type="date" id="start" name="start"/><br>
+
+        <label for="end">To Date:</label>
+        <input type="date" id="end" name="end"/><br>
+
+        <button type="submit">Search</button>
+    </form>
+  </div>
+{% elif display%}
+    <div class="text-center">
+      <form style="display: inline;" action="{% url 'login' %}" method = 'POST'>
+        {% csrf_token %}
+        <button style="width:40%" class="btn btn-primary">Create Code</button>
+      </form>
+      <form style="display: inline;" action="{% url 'search' %}" method = 'POST'>
+        {% csrf_token %}
+        <button style="width:40%" class="btn btn-primary">Search Code</button>
+      </form>
+    </div>
+    <div class="text-center">
+      <form style="display: inline;" action="{% url 'display' %}" method = 'POST'>
+        {% csrf_token %}
+          <label for="start">From Date:</label>
+          <input type="date" id="start" name="start"/><br>
+
+          <label for="end">To Date:</label>
+          <input type="date" id="end" name="end"/><br>
+
+          <button type="submit">Search</button>
+      </form>
+    </div>
+    <div>
+    </div>
+    <form action="{% url 'download' %}">
+      <button type="submit">ExportToCSV</button>
+    </form>
+    <br>
+    <div class="SearchBar">
+        <table border="1">
+          <tr>
+              <th>state</th>
+              <th>A_Type</th>
+              <th>D_Type</th>
+              <th>code</th>
+              <th>ref_no</th>
+              <th>created_date</th>
+          </tr>
+          {% for item in queryset %}
+            <tr>
+                <td>{{ item.state_code }}</td>
+                <td>{{ item.A_Type }}</td>
+                <td>{{ item.D_Type }}</td>
+                <td>{{ item.code }}</td>
+                <td>{{ item.Refno }}</td>
+                <td>{{ item.created_date }}</td>
+                <td>Edit/Delete</td>
+            </tr>
+          {% endfor %}
+        </table>
+
+    </div>
+{% endif %}
+</div>
+
+{% endblock %}

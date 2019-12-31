@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+          </li>
+      </ul>
+    </div>
+  </nav>
+  <h3 align="right">  Welcome </h3><h5 align="right"> demo@payu.in </h5>
+
+ {% endblock title %}
+
+{% block content %}
+
+    <script src="{% static 'js/cities.js' %}"></script>
+    <div class="text-center">
+      <form style="display: inline;" action="{% url 'login' %}" method = 'POST'>
+        {% csrf_token %}
+        <button style="width:40%" class="btn btn-primary">Create Code</button>
+      </form>
+      <form style="display: inline;" action="{% url 'search' %}" method = 'POST'>
+        {% csrf_token %}
+        <button style="width:40%" class="btn btn-primary">Search Code</button>
+      </form>
+    </div>
+
+    {% if search %}
+      {% include "search.html" %}
+    {% else %}
+
+      {% if cancel %}
+        <button type="submit" class="accordion">Create Code<i class="fa fa-plus"></i></button>
+      {% else %}
+
+      <div class='col-md-6 offset-md-3'>
+        <div class="form-group">
+          <form method = 'POST' action="{% url 'code' %}">
+            {% csrf_token %}
+              <select id="sts" name ="sts" class="form-control" required>
+                <option value="" disabled selected hidden>Select State</option>
+                <option id="sel_val">this.value</option>
+              </select>
+              <script language="javascript">print_state("sts");</script>
+              <div class='col-md-3 offset-md-8' align="top">
+                  {{ increment|safe }}
+              </div>
+            <table border="1">
+            <table>
+              {{ form }}
+            </table>
+        </div>
+          <button type="submit" class="accordion">Create Code</button>
+        </form>
+          <form action="{% url 'code' %}">
+            <button type="submit" class="accordion">Cancel</button>
+          </form>
+        <style>
+          Create Code{
+          width: 300px;
+          height: 40px;
+
+          }
+          Cancel{
+          width: 300px;
+          height: 40px;
+          }
+        </style>
+
+        <div class="output">
+            {{ result|safe }}
+        </div>
+
+      </div>
+
+      {% endif %}
+
+    {% endif %}
+
+{% endblock %}

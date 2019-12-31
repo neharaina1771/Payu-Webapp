@@ -1,0 +1,10 @@
+state_code,Refno,A_Type,D_Type,result,created_date
+Delhi,1,c,p,DECP123,2019-12-30
+Andaman & Nicobar,1,c,g,ANCG123,2019-12-30
+Dadra & Nagar Haveli,1,c,p,DACP124,2019-12-30
+Bihar,1,c,g,BICG123,2019-12-30
+Chandigarh,1,s,u,CHSU123,2019-12-30
+Himachal Pradesh,1,s,u,HISU123,2019-12-30
+Haryana,1,s,u,HASU123,2019-12-31
+Jammu & Kashmir,1,s,u,JASU123,2019-12-31
+Lakshadweep,1,s,u,LASU123,2019-12-31
